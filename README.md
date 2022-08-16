@@ -2,6 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
+### Built With
+
+UI Components come from Bootstrap5 and the frontend framework is Angular. MapBox is used for the main maps in the app.
+
+* [![Angular][Angular.io]][Angular-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![MapBox][MapBox.com]][Mapbox-url]
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
@@ -25,3 +36,12 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
+
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+
+[MapBox.com]: https://img.shields.io/badge/MapBox-000000?style=for-the-badge&logo=mapbox&logoColor=white
+[Mapbox-url]: https://www.mapbox.com/

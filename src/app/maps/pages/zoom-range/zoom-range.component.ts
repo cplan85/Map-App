@@ -13,6 +13,7 @@ export class ZoomRangeComponent implements AfterViewInit {
 
   map!: mapboxgl.Map;
   zoomValue: number = 12;
+  center: [number, number] = [2.1747936849217937, 41.40378416042038];
 
   constructor() { }
 
@@ -35,6 +36,26 @@ export class ZoomRangeComponent implements AfterViewInit {
     this.map.setFog({}); // Set the default atmosphere style
     });
 
+    this.map.on('zoom', (ev) => {
+      this.zoomValue = this.map.getZoom();
+    })
+
+  
+
+    this.map.on('zoomend', (ev) => {
+      if(this.map.getZoom() > 18) {
+        this.map.zoomTo(18)
+      }
+    })
+
+    this.map.on('move', (event) => {
+      const target = event.target;
+      const {lng, lat} = target.getCenter();
+     this.center = [lng, lat];
+
+      
+    })
+
   }
 
   zoomIn() {
@@ -46,5 +67,11 @@ export class ZoomRangeComponent implements AfterViewInit {
     this.map.zoomOut();
     this.zoomValue = this.map.getZoom();
   }
+
+  zoomChange(value: string) {
+    this.map.zoomTo(Number(value))
+    //this.zoomValue = parseInt(value);
+  }
+  
 
 }
