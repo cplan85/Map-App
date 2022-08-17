@@ -13,6 +13,12 @@ UI Components come from Bootstrap5 and the frontend framework is Angular. MapBox
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## :mortar_board: **What did I learn from this project**
+
+In this project I learned how to implement [Mapbox](https://www.mapbox.com/) to demonstrate 4 different Map views. This involved implementing Angular's [After View Init](https://angular.io/api/core/AfterViewInit) Lifecycle to ensure that the map appears after the component's view initialization. I also learned to implement CRUD operations on map markers, and to store markers with [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
+
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
