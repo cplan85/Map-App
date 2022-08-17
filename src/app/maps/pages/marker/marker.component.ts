@@ -36,6 +36,18 @@ export class MarkerComponent implements AfterViewInit {
     this.markers.push({marker: newMarker, color: color});
 
     this.saveLocalStorageMarker();
+
+    newMarker.on('dragend',() => {
+      this.saveLocalStorageMarker();
+    })
+  }
+
+  deleteMarker(i: number) {
+
+    this.markers[i].marker?.remove();
+    this.markers.splice(i, 1);
+    this.saveLocalStorageMarker();
+
   }
 
   goToMarker(marker:mapboxgl.Marker) {
@@ -89,6 +101,10 @@ export class MarkerComponent implements AfterViewInit {
         marker: newMarker,
         color: item.color
       })
+
+      newMarker.on('dragend',() => {
+        this.saveLocalStorageMarker();
+      })
     })
 
   }
@@ -110,15 +126,6 @@ export class MarkerComponent implements AfterViewInit {
     });
   
     this.readLocalStorage();
-
-    // const markerHtml: HTMLElement = document.createElement('div');
-    // markerHtml.innerHTML = 'Hello World';
-
-    // const marker1 = new mapboxgl.Marker({
-    //   element: markerHtml 
-    // })
-    // .setLngLat(this.center)
-    // .addTo(this.map);
   }
 
 }
