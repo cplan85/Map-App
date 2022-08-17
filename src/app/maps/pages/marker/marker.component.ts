@@ -1,9 +1,10 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 
-interface markerColor {
+interface MarkerColor {
   color: string;
-  marker: mapboxgl.Marker;
+  marker?: mapboxgl.Marker;
+  center?: [number, number]
 }
 
 @Component({
@@ -19,7 +20,7 @@ export class MarkerComponent implements AfterViewInit {
   zoomValue: number = 15;
   center: [number, number] = [2.1747936849217937, 41.40378416042038];
 
-  markers: markerColor[] = [];
+  markers: MarkerColor[] = [];
 
   constructor() { }
 
@@ -33,13 +34,61 @@ export class MarkerComponent implements AfterViewInit {
     .addTo(this.map);
 
     this.markers.push({marker: newMarker, color: color});
+
+    this.saveLocalStorageMarker();
   }
 
   goToMarker(marker:mapboxgl.Marker) {
+    console.log(marker)
    // const lngLat = marker.getLngLat();
     this.map.flyTo({
       center: marker.getLngLat()
      // center: [lngLat.lng, lngLat.lat]
+    })
+
+  }
+
+  saveLocalStorageMarker() {
+
+    const lngLatArr: MarkerColor[] = [];
+
+    this.markers.forEach(m => {
+    const color = m.color;
+    const {lng, lat} = m.marker!.getLngLat();
+
+    lngLatArr.push({
+      color: color,
+      center: [lng, lat],
+
+    })
+    })
+
+    localStorage.setItem('markers', JSON.stringify(lngLatArr )  )
+        
+  }
+
+  readLocalStorage() {
+
+    if(!localStorage.getItem('markers')) {
+      return;
+    }
+
+    const lngLatArr: MarkerColor[] = JSON.parse( localStorage.getItem('markers')!) 
+
+    console.log(lngLatArr);
+
+    lngLatArr.forEach(item => {
+      const newMarker = new mapboxgl.Marker({
+        color: item.color,
+        draggable: true
+      })
+      .setLngLat(item.center!)
+      .addTo(this.map);
+
+      this.markers.push({
+        marker: newMarker,
+        color: item.color
+      })
     })
 
   }
@@ -60,6 +109,7 @@ export class MarkerComponent implements AfterViewInit {
     this.map.setFog({}); // Set the default atmosphere style
     });
   
+    this.readLocalStorage();
 
     // const markerHtml: HTMLElement = document.createElement('div');
     // markerHtml.innerHTML = 'Hello World';
